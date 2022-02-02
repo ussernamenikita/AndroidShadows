@@ -4,10 +4,7 @@ import android.graphics.*
 import com.example.composeshadows.entity.GradientParams
 import com.example.composeshadows.entity.Shadow
 
-class CompatShadowsRenderer(
-    val outline: RectF = RectF(0f, 0f, 0f, 0f),
-    var outlineCornerRadius: Float = 0f
-) {
+class CompatShadowsRenderer {
 
     companion object {
         private const val PERPENDICULAR_ANGLE = 90f
@@ -16,6 +13,10 @@ class CompatShadowsRenderer(
     private var currentShadow: Shadow = Shadow.NO_SHADOW
 
     private var cornerGradientParams = createCornerParams()
+
+    private var outline: RectF = RectF(0f, 0f, 0f, 0f)
+
+    private var outlineCornerRadius: Float = 0f
 
     private val cornerPaint = Paint(Paint.ANTI_ALIAS_FLAG).apply {
         style = Paint.Style.FILL
@@ -45,8 +46,18 @@ class CompatShadowsRenderer(
         get() = currentShadow.linearGradientParams
 
     fun paintCompatShadow(
-        canvas: Canvas
+        canvas: Canvas,
+        outline: RectF,
+        outlineCornerRadius: Float,
+        shadow: Shadow
     ) {
+        this.currentShadow = shadow
+        this.outline = outline
+        this.outlineCornerRadius = outlineCornerRadius
+
+        contentPaint.color = shadow.colorWithAlpha
+        updateGradientValues()
+
         val saved = modifyCanvas(canvas, currentShadow.dX, currentShadow.dY)
         val path = Path()
         // A rectangle with edges corresponding to the straight edges of the outline.
@@ -134,12 +145,6 @@ class CompatShadowsRenderer(
             3
         )
         canvas.restoreToCount(saved)
-    }
-
-    fun setShadowParams(customShadowParams: Shadow) {
-        this.currentShadow = customShadowParams
-        contentPaint.color = customShadowParams.colorWithAlpha
-        updateGradientValues()
     }
 
     /**

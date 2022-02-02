@@ -1,17 +1,16 @@
 package com.example.composeshadows.ui.view
 
-import android.graphics.RectF
-import androidx.compose.foundation.Canvas
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.geometry.CornerRadius
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.Dp
 import com.example.composeshadows.entity.CustomShadowParams
-import com.example.composeshadows.ui.util.ComposeCompatShadowsRenderer
-import com.example.composeshadows.ui.util.toPx
+import com.example.composeshadows.ui.modifier.roundRectShadow
 
 @Composable
 fun ComposeButtonWithShadow(
@@ -21,20 +20,22 @@ fun ComposeButtonWithShadow(
     buttonCornerRadiusDp: Float,
     buttonColor: Color
 ) {
-    Canvas(
-        Modifier.width(Dp(buttonWidthDp)).height(Dp(buttonHeightDp))
-    ) {
-        ComposeCompatShadowsRenderer().also {
-            for (layer in shadowParams.layers) {
-                it.outlineCornerRadius = buttonCornerRadiusDp.toPx
-                it.outline = RectF(0f, 0f, size.width, size.height)
-                it.setShadowParams(layer)
-                it.paintCompatShadow(this)
-            }
-        }
-        drawRoundRect(
-            color = buttonColor,
-            cornerRadius = CornerRadius(buttonCornerRadiusDp.toPx, buttonCornerRadiusDp.toPx)
-        )
-    }
+    Box(
+        modifier = Modifier
+            .width(Dp(buttonWidthDp))
+            .height(Dp(buttonHeightDp))
+            .roundRectShadow(
+                customShadowParams = shadowParams,
+                cornerRadius = Dp(buttonCornerRadiusDp)
+            )
+            .background(
+                color = buttonColor,
+                shape = RoundedCornerShape(
+                    topStart = Dp(buttonCornerRadiusDp),
+                    topEnd = Dp(buttonCornerRadiusDp),
+                    bottomEnd = Dp(buttonCornerRadiusDp),
+                    bottomStart = Dp(buttonCornerRadiusDp),
+                )
+            )
+    )
 }

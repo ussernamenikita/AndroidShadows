@@ -19,9 +19,9 @@ class ComposeCompatShadowsRenderer {
         private const val PERPENDICULAR_ANGLE = 90f
     }
 
-    var outline: RectF = RectF(0f, 0f, 0f, 0f)
+    private var outline: RectF = RectF(0f, 0f, 0f, 0f)
 
-    var outlineCornerRadius: Float = 0f
+    private var outlineCornerRadius: Float = 0f
 
     private var currentShadow: Shadow = Shadow.NO_SHADOW
 
@@ -47,19 +47,21 @@ class ComposeCompatShadowsRenderer {
         get() = currentShadow.linearGradientParams
 
     fun paintCompatShadow(
-        canvas: DrawScope
+        canvas: DrawScope,
+        outlineCornerRadius: Float,
+        shadow: Shadow
     ) {
-        updateGradientValues()
+        this.currentShadow = shadow
+        this.outline = RectF(0f, 0f, canvas.size.width, canvas.size.height)
+        this.outlineCornerRadius = outlineCornerRadius
+
         modifyCanvas(canvas, currentShadow.dX, currentShadow.dY) {
+            updateGradientValues()
 
             // A rectangle with edges corresponding to the straight edges of the outline.
             val innerRect = RectF(outline)
             innerRect.inset(outlineCornerRadius, outlineCornerRadius)
-            edgePaint = Brush.linearGradient(
-                colorStops = sideGradientParams.colorsAndStops(shadowColor),
-                tileMode = TileMode.Clamp,
-                end = Offset(shadowSize + innerShadowSize, 0f)
-            )
+
             // A rectangle used to represent the edge shadow.
             val edgeShadowRect = RectF()
 
@@ -107,7 +109,7 @@ class ComposeCompatShadowsRenderer {
             // Draw shadow color between bottom shadow and inner rect
             drawRect(
                 Color(shadowColor),
-                topLeft = Offset(outlineCornerRadius,outlineCornerRadius + innerRect.height()),
+                topLeft = Offset(outlineCornerRadius, outlineCornerRadius + innerRect.height()),
                 size = Size(width = innerRect.width(), outlineCornerRadius - innerShadowSize)
             )
 
@@ -122,15 +124,34 @@ class ComposeCompatShadowsRenderer {
                 outerArcRadius,
                 0
             )
-            drawCornerShadow(this, cornerPaint, path, innerRect.left, innerRect.bottom, outerArcRadius, 1)
-            drawCornerShadow(this, cornerPaint, path, innerRect.left, innerRect.top, outerArcRadius, 2)
-            drawCornerShadow(this, cornerPaint, path, innerRect.right, innerRect.top, outerArcRadius, 3)
+            drawCornerShadow(
+                this,
+                cornerPaint,
+                path,
+                innerRect.left,
+                innerRect.bottom,
+                outerArcRadius,
+                1
+            )
+            drawCornerShadow(
+                this,
+                cornerPaint,
+                path,
+                innerRect.left,
+                innerRect.top,
+                outerArcRadius,
+                2
+            )
+            drawCornerShadow(
+                this,
+                cornerPaint,
+                path,
+                innerRect.right,
+                innerRect.top,
+                outerArcRadius,
+                3
+            )
         }
-    }
-
-    fun setShadowParams(customShadowParams: Shadow) {
-        this.currentShadow = customShadowParams
-        updateGradientValues()
     }
 
     /**
@@ -222,6 +243,11 @@ class ComposeCompatShadowsRenderer {
             center = Offset.Zero,
             radius = outerArcRadius,
             tileMode = TileMode.Clamp
+        )
+        edgePaint = Brush.linearGradient(
+            colorStops = sideGradientParams.colorsAndStops(shadowColor),
+            tileMode = TileMode.Clamp,
+            end = Offset(shadowSize + innerShadowSize, 0f)
         )
     }
 
