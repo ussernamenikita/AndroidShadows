@@ -257,10 +257,9 @@ class CompatShadowsRenderer {
     private fun createCornerParams(): GradientParams {
         val innerShadowSize = innerShadowSize
         val points = sideGradientParams.getPoints().map { point ->
-            val sizeValueByPoint = (shadowSize + innerShadowSize) * point
-            val result =
-                (sizeValueByPoint + outlineCornerRadius - innerShadowSize) / (outerArcRadius / 100f)
-            result / 100
+            val pointsInPixelsInLinearGradient = (shadowSize + innerShadowSize) * point
+            val radialGradientStartPoint = outlineCornerRadius - innerShadowSize
+            (pointsInPixelsInLinearGradient + radialGradientStartPoint) / outerArcRadius
         }
         val newColorsAndPoints = sideGradientParams
             .colorsAndPoints
