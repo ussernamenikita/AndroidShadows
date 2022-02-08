@@ -7,8 +7,11 @@ import kotlinx.parcelize.Parcelize
 /**
  * Описание точки градиента
  *
- * @param point - удаление от начала градиента. 0.0 - начало градинета. 1.0 - конец градиента
- * @param colorMultiplier - изменение цвета в точке. 1 - изначальный цвет тени, 1.0 - прозрачный цвет
+ * @param point - удаление от начала градиента.
+ * 0.0 - начало градинета. 1.0 - конец градиента
+ *
+ * @param colorMultiplier - изменение цвета в точке.
+ * 0.0 - цвет тени, 1.0 - прозрачный цвет
  */
 @Parcelize
 data class GradientPointAndColorMultiplier(

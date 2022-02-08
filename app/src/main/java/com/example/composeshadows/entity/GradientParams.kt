@@ -10,7 +10,8 @@ import kotlin.math.roundToInt
 /**
  * Параметры градиента
  *
- * @param colorsAndPoints - список точек градиента со значением цветов в этой точке
+ * @param colorsAndPoints - список точек градиента
+ * со значением цветов в этой точке
  */
 @Parcelize
 class GradientParams(
