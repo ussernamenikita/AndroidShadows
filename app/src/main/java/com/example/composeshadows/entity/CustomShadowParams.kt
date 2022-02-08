@@ -6,7 +6,7 @@ import com.example.composeshadows.ui.util.toPx
 import kotlinx.parcelize.Parcelize
 
 /**
- * Композитная тень из дизайн системы
+ * Композитная тень дизайн системы
  *
  * @param name - название тени
  * @param layers - список теней
