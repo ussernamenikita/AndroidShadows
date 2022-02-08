@@ -39,8 +39,8 @@ fun SettingForTab(mutableState: MutableState<CustomShadowParamsState>) {
     }
     when (mutableState.value.layerSelectedTab) {
         CustomShadowParamsState.LayerTab.ColorAlphaTab -> {
-            SliderWithValue(currentValue = currentLayer.colorAlphaPercent, onValueChange = {
-                updateLayer(currentLayer.copy(colorAlphaPercent = it))
+            SliderWithValue(currentValue = currentLayer.colorAlpha, onValueChange = {
+                updateLayer(currentLayer.copy(colorAlpha = it))
             })
         }
         CustomShadowParamsState.LayerTab.DxTab -> {

@@ -7,6 +7,11 @@ import kotlinx.parcelize.IgnoredOnParcel
 import kotlinx.parcelize.Parcelize
 import kotlin.math.roundToInt
 
+/**
+ * Параметры градиента
+ *
+ * @param colorsAndPoints - список точек градиента со значением цветов в этой точке
+ */
 @Parcelize
 class GradientParams(
     val colorsAndPoints: List<GradientPointAndColorMultiplier>

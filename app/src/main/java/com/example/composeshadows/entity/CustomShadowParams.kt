@@ -5,6 +5,12 @@ import android.os.Parcelable
 import com.example.composeshadows.ui.util.toPx
 import kotlinx.parcelize.Parcelize
 
+/**
+ * Композитная тень из дизайн системы
+ *
+ * @param name - название тени
+ * @param layers - список теней
+ */
 @Parcelize
 data class CustomShadowParams(
     val name: String,
@@ -16,14 +22,14 @@ data class CustomShadowParams(
 
         fun shadow1(): CustomShadowParams {
             return CustomShadowParams(
-                name = "Shadow1",
+                name = "Shadow 1",
                 listOf(
                     Shadow(
                         dX = 0.toPx,
                         dY = 1.toPx,
                         radius = 2.toPx,
                         color = SHADOW_COLOR,
-                        colorAlphaPercent = 0.18f,
+                        colorAlpha = 0.18f,
                         linearGradientParams = GradientParams(
                             listOf(
                                 GradientPointAndColorMultiplier(0f, 1f),
@@ -38,14 +44,14 @@ data class CustomShadowParams(
 
         fun shadow2(): CustomShadowParams {
             return CustomShadowParams(
-                name = "Shadow2",
+                name = "Shadow 2",
                 listOf(
                     Shadow(
                         dX = 0.toPx,
                         dY = 2.toPx,
                         radius = 9.toPx,
                         color = SHADOW_COLOR,
-                        colorAlphaPercent = 0.14f,
+                        colorAlpha = 0.14f,
                         linearGradientParams = GradientParams(
                             listOf(
                                 GradientPointAndColorMultiplier(0f, 0.6f),
@@ -60,14 +66,14 @@ data class CustomShadowParams(
 
         fun shadow3(): CustomShadowParams {
             return CustomShadowParams(
-                name = "Shadow3",
+                name = "Shadow 3",
                 listOf(
                     Shadow(
                         dX = 0.toPx,
                         dY = 4.toPx,
                         radius = 10.toPx,
                         color = SHADOW_COLOR,
-                        colorAlphaPercent = 0.18f,
+                        colorAlpha = 0.18f,
                         linearGradientParams = GradientParams(
                             listOf(
                                 GradientPointAndColorMultiplier(0f, 0.65f),
@@ -82,14 +88,14 @@ data class CustomShadowParams(
 
         fun shadow4(): CustomShadowParams {
             return CustomShadowParams(
-                name = "Shadow4",
+                name = "Shadow 4",
                 listOf(
                     Shadow(
                         dX = 0.toPx,
                         dY = 4.toPx,
                         radius = 8.toPx,
                         color = SHADOW_COLOR,
-                        colorAlphaPercent = 0.27f,
+                        colorAlpha = 0.27f,
                         linearGradientParams = GradientParams(
                             listOf(
                                 GradientPointAndColorMultiplier(0f, 1f),
@@ -104,14 +110,14 @@ data class CustomShadowParams(
 
         fun shadow5(): CustomShadowParams {
             return CustomShadowParams(
-                name = "Shadow5",
+                name = "Shadow 5",
                 listOf(
                     Shadow(
                         dX = 0.toPx,
                         dY = 7.toPx,
                         radius = 12.toPx,
                         color = SHADOW_COLOR,
-                        colorAlphaPercent = 0.22f,
+                        colorAlpha = 0.22f,
                         linearGradientParams = GradientParams(
                             listOf(
                                 GradientPointAndColorMultiplier(0f, 1f),
@@ -126,14 +132,14 @@ data class CustomShadowParams(
 
         fun shadow6(): CustomShadowParams {
             return CustomShadowParams(
-                name = "Shadow6",
+                name = "Shadow 6",
                 listOf(
                     Shadow(
                         dX = 0.toPx,
                         dY = 3.toPx,
                         radius = 5.toPx,
                         color = SHADOW_COLOR,
-                        colorAlphaPercent = 0.27f,
+                        colorAlpha = 0.27f,
                         linearGradientParams = GradientParams(
                             listOf(
                                 GradientPointAndColorMultiplier(0f, 1f),
@@ -147,7 +153,7 @@ data class CustomShadowParams(
                         dY = 1.toPx,
                         radius = 14.toPx,
                         color = SHADOW_COLOR,
-                        colorAlphaPercent = 0.15f,
+                        colorAlpha = 0.15f,
                         linearGradientParams = GradientParams(
                             listOf(
                                 GradientPointAndColorMultiplier(0f, 1f),
@@ -162,13 +168,13 @@ data class CustomShadowParams(
 
         fun shadow7(): CustomShadowParams {
             return CustomShadowParams(
-                name = "Shadow7",
+                name = "Shadow 7",
                 listOf(
                     Shadow(
                         dX = 0.toPx,
                         dY = 11.toPx,
                         radius = 15.toPx,
-                        colorAlphaPercent = 0.2f,
+                        colorAlpha = 0.2f,
                         color = SHADOW_COLOR,
                         linearGradientParams = GradientParams(
                             listOf(
@@ -182,7 +188,7 @@ data class CustomShadowParams(
                         dX = 0.toPx,
                         dY = 9.toPx,
                         radius = 35.toPx,
-                        colorAlphaPercent = 0.15f,
+                        colorAlpha = 0.15f,
                         color = SHADOW_COLOR,
                         linearGradientParams = GradientParams(
                             listOf(
@@ -196,7 +202,7 @@ data class CustomShadowParams(
                         dX = 0.toPx,
                         dY = 24.toPx,
                         radius = 38.toPx,
-                        colorAlphaPercent = 0.08f,
+                        colorAlpha = 0.08f,
                         color = SHADOW_COLOR,
                         linearGradientParams = GradientParams(
                             listOf(
@@ -221,7 +227,7 @@ data class CustomShadowParams(
                         radius = 0f,
                         color = Color.TRANSPARENT,
                         linearGradientParams = GradientParams.defaultLinearGradient(),
-                        colorAlphaPercent = 0f,
+                        colorAlpha = 0f,
                     )
                 )
             )
